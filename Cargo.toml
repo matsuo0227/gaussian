@@ -1,0 +1,9 @@
+[package]
+name = "gaussian"
+version = "0.1.0"
+authors = ["Kazuki Matsuo <matsuo2019@s.okayama-u.ac.jp>"]
+edition = "2018"
+
+[dependencies]
+image = "0.20.1"
+ndarray = "0.12.1"

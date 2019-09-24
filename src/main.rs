@@ -3,6 +3,7 @@ extern crate ndarray;
 
 use std::env;
 use ndarray::prelude::*;
+use std::fs;
 
 fn color(img: &image::ImageBuffer<image::Rgb<u8>, std::vec::Vec<u8>>, x: u32, y:u32, rgb: char) -> u8{
     let mut c: usize = 0;
@@ -95,7 +96,7 @@ fn main() {
 
     let max: usize = 31;
 
-    for n in (3..=max).filter(|&x| x % 2 == 1){
+    for n in (1..=max).filter(|&x| x % 2 == 1){
         println!("kernel size = {0} x {0}", n);
         let mut imgbuf = image::ImageBuffer::new(width, height);
 
@@ -117,7 +118,13 @@ fn main() {
                 imgbuf.put_pixel(x, y, image::Rgb([res_pix_r, res_pix_g, res_pix_b]));
             }
         }
-        let output_name = format!("{}_gaussian_kernel{}.png",
+
+        let base_name: &str = img_path.rsplit("/").next().unwrap().split(".").next().unwrap();
+
+        fs::create_dir_all(format!("result_pic/{}", base_name));
+
+        let output_name = format!("result_pic/{}/{}-gaussian-kernel{}.png",
+                                  base_name,
                                   img_path.rsplit("/").next().unwrap().split(".").next().unwrap(),
                                   n);
         imgbuf.save(output_name).ok().expect("can't save the image");

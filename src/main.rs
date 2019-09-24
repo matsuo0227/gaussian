@@ -94,7 +94,7 @@ fn main() {
     let width = img.width();
     let height = img.height();
 
-    let max: usize = 31;
+    let max: usize = 7;
 
     for n in (1..=max).filter(|&x| x % 2 == 1){
         println!("kernel size = {0} x {0}", n);
